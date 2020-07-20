@@ -83,6 +83,18 @@ public class Requests extends BeforeRequest {
 
     @Test
     @Order(6)
+    @DisplayName("Check first sales ID")
+    public void checkFirstSalesID() {
+        String salesID = "5177449d082cd050f3000221";
+        response = given(requestSpec)
+                .when()
+                .get(EndPoints.SALES);
+        String actualSalesID = ParseMethods.getFirstSalesID(response);
+        Assertions.assertEquals(salesID, actualSalesID);
+    }
+
+    @Test
+    @Order(7)
     @DisplayName("Check username")
     public void checkUserName() throws IOException {
         response = given()

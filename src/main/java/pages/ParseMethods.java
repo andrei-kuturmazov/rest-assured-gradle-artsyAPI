@@ -51,5 +51,13 @@ public class ParseMethods {
     public static String getArtistNationality(Response response) {
         return getJsonObjectFromResponse(response).get("nationality").getAsString();
     }
+
+    public static String getFirstSalesID(Response response) {
+        return getJsonObjectFromResponse(response)
+                .get("_embedded").getAsJsonObject()
+                .get("sales").getAsJsonArray()
+                .get(0).getAsJsonObject()
+                .get("id").getAsString();
+    }
 }
 

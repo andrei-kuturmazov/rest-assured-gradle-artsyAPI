@@ -9,7 +9,7 @@ public class ArtsyAPISpecification {
 
     public static RequestSpecification getRequestSpecification() {
         return new RequestSpecBuilder()
-                .setBaseUri(EndPoints.BASEURI)
+                .setBaseUri(EndPoints.BASE_URL)
                 .setContentType(ContentType.JSON)
                 .log(LogDetail.METHOD)
                 .log(LogDetail.URI)
