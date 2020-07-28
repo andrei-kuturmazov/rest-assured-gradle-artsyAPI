@@ -1,30 +1,35 @@
 package utils;
 
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class Property {
 
-    public static String getPropertyValue(String propertyKey) throws IOException {
-        String result = "";
-        InputStream inputStream = null;
+    protected static FileInputStream fileInputStream;
+    protected static Properties properties;
 
+    static {
         try {
-            Properties prop = new Properties();
-            String propFileName = "login.properties";
-            inputStream = Property.class.getClassLoader().getResourceAsStream(propFileName);
-            prop.load(inputStream);
-            result = prop.getProperty(propertyKey);
-        } catch (Exception e) {
+            fileInputStream = new FileInputStream("./src/main/resources/login.properties");
+            properties = new Properties();
+            properties.load(fileInputStream);
+        } catch (IOException e) {
             Log.error(e);
         } finally {
-            if (inputStream != null) {
-                inputStream.close();
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    Log.error(e);
+                }
             }
         }
-        return result;
+    }
+
+    public static String getProperty(String key) {
+        return properties.getProperty(key);
     }
 }
 

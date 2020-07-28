@@ -4,7 +4,6 @@ import pages.ParseMethods;
 import utils.EndPoints;
 import utils.Property;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -96,12 +95,12 @@ public class Requests extends BeforeRequest {
     @Test
     @Order(7)
     @DisplayName("Check username")
-    public void checkUserName() throws IOException {
+    public void checkUserName() {
         response = given()
                 .spec(requestSpec)
                 .when()
-                .header("X-Access-Token", Property.getPropertyValue("access_token"))
-                .get(EndPoints.USERS+ "/" + Property.getPropertyValue("user_id"));
+                .header("X-Access-Token", Property.getProperty("access_token"))
+                .get(EndPoints.USERS+ "/" + Property.getProperty("user_id"));
         String username = ParseMethods.getJsonObjectFromResponse(response).get("name").getAsString();
         Assertions.assertEquals("andrei_kuturmazov", username);
     }
