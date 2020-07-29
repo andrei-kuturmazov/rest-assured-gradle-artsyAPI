@@ -10,4 +10,5 @@ public class EndPoints {
     public static final String IMAGES = "/images";
     public static final String USERS = "/users";
     public static final String SALES = "/sales";
+    public static final String FAIRS = "/fairs";
 }

@@ -55,7 +55,7 @@ public class Requests extends BeforeRequest {
 
     @Test
     @Order(4)
-    @DisplayName("Check if Gustav has artwork 'Mona Lisa'")
+    @DisplayName("Check if Leonardo has artwork 'Mona Lisa'")
     public void checkArtistHasArtwork() {
         response = given()
                 .spec(requestSpec)
@@ -94,13 +94,38 @@ public class Requests extends BeforeRequest {
 
     @Test
     @Order(7)
+    @DisplayName("Check existing fair status")
+    public void checkFairStatus() {
+        String fairID = "4dbb0c01771d8967970010a8";
+        response = given()
+                .spec(requestSpec)
+                .when()
+                .get(EndPoints.FAIRS + "/" + fairID);
+        String actualFairStatus = ParseMethods.getFairStatus(response);
+        Assertions.assertEquals("closed", actualFairStatus);
+    }
+
+    @Test
+    @Order(8)
+    @DisplayName("Check the correct interaction of shows link")
+    public void checkShowLinkInteraction() {
+        String fairID = "4dbb0c01771d8967970010a8";
+        response = given()
+                .spec(requestSpec)
+                .when()
+                .get(EndPoints.FAIRS + "/" + fairID);
+        Assertions.assertEquals(fairID, ParseMethods.getShowIdFromFairsResponse(response));
+    }
+
+    @Test
+    @Order(9)
     @DisplayName("Check username")
     public void checkUserName() {
         response = given()
                 .spec(requestSpec)
                 .when()
                 .header("X-Access-Token", Property.getProperty("access_token"))
-                .get(EndPoints.USERS+ "/" + Property.getProperty("user_id"));
+                .get(EndPoints.USERS + "/" + Property.getProperty("user_id"));
         String username = ParseMethods.getJsonObjectFromResponse(response).get("name").getAsString();
         Assertions.assertEquals("andrei_kuturmazov", username);
     }

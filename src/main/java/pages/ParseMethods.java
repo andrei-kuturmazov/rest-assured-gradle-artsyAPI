@@ -59,5 +59,28 @@ public class ParseMethods {
                 .get(0).getAsJsonObject()
                 .get("id").getAsString();
     }
+
+    public static String getFairStatus(Response response) {
+        return getJsonObjectFromResponse(response)
+                .get("status").getAsString();
+    }
+
+    public static String getShowLinkFromFairsResponse(Response response) {
+        return getJsonObjectFromResponse(response)
+                .get("_links").getAsJsonObject()
+                .get("shows").getAsJsonObject()
+                .get("href").getAsString();
+    }
+
+    public static String getShowIdFromFairsResponse(Response response) {
+        String fairIdInsideLink = "";
+        String showLink = getShowLinkFromFairsResponse(response);
+        Matcher m = Pattern.compile("[\\w+|\\d+]{24}").matcher(showLink);
+        while (m.find()) {
+            fairIdInsideLink = m.group(0);
+        }
+        Log.info("ID from shows link inside fairs response" + fairIdInsideLink);
+        return fairIdInsideLink;
+    }
 }
 
