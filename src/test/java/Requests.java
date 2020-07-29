@@ -14,31 +14,31 @@ import static io.restassured.RestAssured.given;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName("API tests for artsy.net")
 public class Requests extends BeforeRequest {
-    private String GustavKlimtID = "";
+    private String DaVinchiID = "";
     private Response response = null;
 
     @Test
     @Order(1)
-    @DisplayName("Check Gustav Klimt ID")
+    @DisplayName("Check Da Vinci ID")
     public void checkArtistId() {
         response = given()
                 .spec(requestSpec)
                 .when()
-                .get(EndPoints.SEARCH + "Gustav Klimt");
-        GustavKlimtID = ParseMethods.getArtistIdFromSearch(response);
-        Assertions.assertEquals("4d8b92b64eb68a1b2c000414", GustavKlimtID);
+                .get(EndPoints.SEARCH + "Leonardo Da Vinci");
+        DaVinchiID = ParseMethods.getArtistIdFromSearch(response);
+        Assertions.assertEquals("4d8b92684eb68a1b2c00009e", DaVinchiID);
     }
 
     @Test
     @Order(2)
-    @DisplayName("Check Gustav's hometown")
+    @DisplayName("Check Da Vinci hometown")
     public void checkArtistHomeTown() {
         response = given()
                 .spec(requestSpec)
                 .when()
-                .get(EndPoints.ARTISTS + "/" + GustavKlimtID);
+                .get(EndPoints.ARTISTS + "/" + DaVinchiID);
         String hometown = ParseMethods.getArtistHometown(response);
-        Assertions.assertEquals("Baumgarten, Austria", hometown);
+        Assertions.assertEquals("Anchiano, Italy", hometown);
     }
 
     @Test
@@ -48,20 +48,20 @@ public class Requests extends BeforeRequest {
         response = given()
                 .spec(requestSpec)
                 .when()
-                .get(EndPoints.ARTISTS + "/" + GustavKlimtID);
+                .get(EndPoints.ARTISTS + "/" + DaVinchiID);
         String nationality = ParseMethods.getArtistNationality(response);
-        Assertions.assertEquals("Austrian", nationality);
+        Assertions.assertEquals("Italian", nationality);
     }
 
     @Test
     @Order(4)
-    @DisplayName("Check if Gustav has artwork 'Curled up Girl on Bed'")
+    @DisplayName("Check if Gustav has artwork 'Mona Lisa'")
     public void checkArtistHasArtwork() {
         response = given()
                 .spec(requestSpec)
                 .when()
-                .get(EndPoints.ARTWORKS + "/?artist_id=" + GustavKlimtID);
-        Assertions.assertTrue(response.getBody().asString().contains("Curled up Girl on Bed"));
+                .get(EndPoints.ARTWORKS + "/?artist_id=" + DaVinchiID);
+        Assertions.assertTrue(response.getBody().asString().contains("Mona Lisa"));
     }
 
     @Test
