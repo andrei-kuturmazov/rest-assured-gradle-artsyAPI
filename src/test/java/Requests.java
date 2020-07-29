@@ -37,8 +37,7 @@ public class Requests extends BeforeRequest {
                 .spec(requestSpec)
                 .when()
                 .get(EndPoints.ARTISTS + "/" + DaVinchiID);
-        String hometown = ParseMethods.getArtistHometown(response);
-        Assertions.assertEquals("Anchiano, Italy", hometown);
+        Assertions.assertEquals("Anchiano, Italy", ParseMethods.getArtistHometown(response));
     }
 
     @Test
@@ -49,8 +48,7 @@ public class Requests extends BeforeRequest {
                 .spec(requestSpec)
                 .when()
                 .get(EndPoints.ARTISTS + "/" + DaVinchiID);
-        String nationality = ParseMethods.getArtistNationality(response);
-        Assertions.assertEquals("Italian", nationality);
+        Assertions.assertEquals("Italian", ParseMethods.getArtistNationality(response));
     }
 
     @Test
@@ -88,8 +86,7 @@ public class Requests extends BeforeRequest {
         response = given(requestSpec)
                 .when()
                 .get(EndPoints.SALES);
-        String actualSalesID = ParseMethods.getFirstSalesID(response);
-        Assertions.assertEquals(salesID, actualSalesID);
+        Assertions.assertEquals(salesID, ParseMethods.getFirstSalesID(response));
     }
 
     @Test
@@ -101,8 +98,7 @@ public class Requests extends BeforeRequest {
                 .spec(requestSpec)
                 .when()
                 .get(EndPoints.FAIRS + "/" + fairID);
-        String actualFairStatus = ParseMethods.getFairStatus(response);
-        Assertions.assertEquals("closed", actualFairStatus);
+        Assertions.assertEquals("closed", ParseMethods.getFairStatus(response));
     }
 
     @Test
@@ -126,8 +122,7 @@ public class Requests extends BeforeRequest {
                 .when()
                 .header("X-Access-Token", Property.getProperty("access_token"))
                 .get(EndPoints.USERS + "/" + Property.getProperty("user_id"));
-        String username = ParseMethods.getJsonObjectFromResponse(response).get("name").getAsString();
-        Assertions.assertEquals("andrei_kuturmazov", username);
+        Assertions.assertEquals("andrei_kuturmazov", ParseMethods.getJsonObjectFromResponse(response).get("name").getAsString());
     }
 }
 
