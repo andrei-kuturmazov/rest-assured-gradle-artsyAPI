@@ -17,8 +17,7 @@ public class BeforeRequest {
                 .when()
                 .body(Bodies.getRequestTokenBody())
                 .post(EndPoints.TOKEN);
-        String token = ParseMethods.getAXAPPToken(response);
-        requestSpec.header("x-xapp-token", token);
+        requestSpec.header("x-xapp-token", ParseMethods.getAXAPPToken(response));
     }
 }
 

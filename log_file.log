@@ -300,3 +300,5 @@ java.io.FileNotFoundException: .\src\main\java\resources\login.properties (Систе
 2020-07-29 10:26:59 INFO  Log:26 - ID from shows link inside fairs response4dbb0c01771d8967970010a8
 2020-07-29 10:33:13 INFO  Log:26 - Artist id from search: 4d8b92684eb68a1b2c00009e
 2020-07-29 10:33:20 INFO  Log:26 - ID from shows link inside fairs response4dbb0c01771d8967970010a8
+2020-07-29 10:48:19 INFO  Log:26 - Artist id from search: 4d8b92684eb68a1b2c00009e
+2020-07-29 10:48:26 INFO  Log:26 - ID from shows link inside fairs response4dbb0c01771d8967970010a8
