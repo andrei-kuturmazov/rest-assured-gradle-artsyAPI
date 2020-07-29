@@ -43,7 +43,7 @@ public class Requests extends BeforeRequest {
 
     @Test
     @Order(3)
-    @DisplayName("Check Gustav's nationality")
+    @DisplayName("Check Da Vinci nationality")
     public void checkArtistNationality() {
         response = given()
                 .spec(requestSpec)
