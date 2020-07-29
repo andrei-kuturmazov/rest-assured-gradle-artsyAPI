@@ -15,22 +15,17 @@ public class ParseMethods {
     }
 
     public static String getAXAPPToken(Response response) {
-        String xapppToken = getJsonObjectFromResponse(response).get("token").getAsString();
-        Log.info("Token: " + xapppToken);
-        return xapppToken;
+        return getJsonObjectFromResponse(response).get("token").getAsString();
     }
 
     public static String getArtistLinkFromSearch(Response response) {
-        Log.info("Search results: " + response.getBody().asString());
-        String artistLink = getJsonObjectFromResponse(response)
+        return getJsonObjectFromResponse(response)
                 .get("_embedded").getAsJsonObject()
                 .get("results").getAsJsonArray()
                 .get(0).getAsJsonObject()
                 .get("_links").getAsJsonObject()
                 .get("self").getAsJsonObject()
                 .get("href").getAsString();
-        Log.info("Artist link from search: " + artistLink);
-        return artistLink;
     }
 
     public static String getArtistIdFromSearch(Response response) {
